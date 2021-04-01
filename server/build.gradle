@@ -1,0 +1,61 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("io.micronaut.application") version "1.4.2"
+}
+
+version = "0.1"
+group = "server"
+
+repositories {
+    mavenCentral()
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.mifinity.cctest.*")
+    }
+}
+
+dependencies {
+    compileOnly('org.projectlombok:lombok:1.18.12')
+    compile("com.h2database:h2")
+    annotationProcessor("org.projectlombok:lombok:1.18.12")
+    annotationProcessor("io.micronaut:micronaut-inject-java:${micronautVersion}")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor:${micronautDataVersion}")
+
+    implementation("io.micronaut:micronaut-http-server-netty:${micronautVersion}")
+    implementation("io.micronaut:micronaut-runtime:${micronautVersion}")
+    implementation("io.micronaut:micronaut-validation:${micronautVersion}")
+    implementation("io.micronaut:micronaut-inject:${micronautVersion}")
+    implementation("io.micronaut:micronaut-inject-java:${micronautVersion}")
+    implementation("io.micronaut.security:micronaut-security-annotations:${micronautSecurityVersion}")
+    implementation("io.micronaut.security:micronaut-security-jwt:${micronautSecurityVersion}")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa:${micronautDataVersion}")
+    implementation("io.micronaut.data:micronaut-data-processor:${micronautDataVersion}")
+    implementation("io.micronaut.data:micronaut-data-jdbc:${micronautDataVersion}")
+    implementation("io.micronaut.data:micronaut-data-runtime:${micronautDataVersion}")
+
+    implementation("io.micronaut.configuration:micronaut-jdbc-tomcat:${micronautJdbcTomcatVersion}")
+    implementation("io.micronaut.configuration:micronaut-hibernate-validator:${micronautHibernateValidatorVersion}")
+    implementation("io.micronaut.liquibase:micronaut-liquibase")
+
+    implementation("org.slf4j:jul-to-slf4j:1.7.30")
+    testImplementation("io.micronaut.test:micronaut-test-junit5:${micronautJunitTestVersion}")
+    testImplementation("io.micronaut:micronaut-http-client:${micronautVersion}")
+
+    runtimeOnly("ch.qos.logback:logback-classic")
+}
+
+application {
+    mainClass.set("com.mifinity.cctest.Application")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("1.8")
+    targetCompatibility = JavaVersion.toVersion("1.8")
+}
+
+
+

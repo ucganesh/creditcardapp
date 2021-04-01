@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet id="vd-0.0.1-1" author="chaitanya" context="dev">
+        <loadData encoding="UTF-8" file="data/user-1.0.csv" separator="," tableName="USER" relativeToChangelogFile="true">
+            <column name="ID" type="NUMERIC"/>
+            <column name="NAME" type="STRING"/>
+            <column name="CREATED_BY" type="STRING"/>
+        </loadData>
+    </changeSet>
+    <changeSet id="vd-0.0.1-2" author="chaitanya" context="dev">
+        <loadData encoding="UTF-8" file="data/identity-1.0.csv" separator="," tableName="IDENTITY" relativeToChangelogFile="true">
+            <column name="ID" type="NUMERIC"/>
+            <column name="USER_ID" type="NUMERIC"/>
+            <column name="LOGIN" type="STRING"/>
+            <column name="PASSWORD" type="STRING"/>
+            <column name="CREATED_BY" type="STRING"/>
+        </loadData>
+    </changeSet>
+    <changeSet id="vd-0.0.1-3" author="chaitanya" context="dev">
+        <loadData encoding="UTF-8" file="data/role-1.0.csv" separator="," tableName="ROLE" relativeToChangelogFile="true">
+            <column name="NAME" type="STRING"/>
+        </loadData>
+    </changeSet>
+    <changeSet id="vd-0.0.1-4" author="chaitanya" context="dev">
+        <loadData encoding="UTF-8" file="data/identityrole-1.0.csv" separator="," tableName="IDENTITY_ROLE" relativeToChangelogFile="true">
+            <column name="ID" type="NUMERIC"/>
+            <column name="IDENTITY_ID" type="NUMERIC"/>
+            <column name="ROLE" type="STRING"/>
+        </loadData>
+    </changeSet>
+    <changeSet id="vd-0.0.1-5" author="chaitanya" context="dev">
+        <loadData encoding="UTF-8" file="data/creditcard-1.0.csv" separator="," tableName="Creditcard" relativeToChangelogFile="true">
+            <column name="ID" type="NUMERIC"/>
+            <column name="USER_ID" type="NUMERIC"/>
+            <column name="NAME" type="STRING"/>
+            <column name="NUMBER" type="STRING"/>
+            <column name="EXPIRY_DATE" type="DATE"/>
+            <column name="TYPE" type="STRING"/>
+            <column name="CREATED_BY" type="STRING"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,69 @@
+﻿<h1 *ngIf="isAddMode" xmlns="http://www.w3.org/1999/html">Add Creditcard</h1>
+<h1 *ngIf="!isAddMode">Edit Creditcard</h1>
+ <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="type">
+          Type
+        </label>
+        <select *ngIf="isAddMode" formControlName="type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+          <option *ngFor="let cardType of creditCardTypes" [ngValue]="cardType">
+            {{ cardType }}
+          </option>
+        </select>
+        <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+          <div *ngIf="f.type.errors.required">Type is required</div>
+        </div>
+        <span *ngIf="!isAddMode" class="form-control">{{form.value.type}}</span>
+      </div>
+        <div class="form-group col">
+            <label for="number">Card Number</label>
+            <input *ngIf="isAddMode" type="text" formControlName="number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.number.errors }" />
+            <div *ngIf="submitted && f.number.errors" class="invalid-feedback">
+                <div *ngIf="f.number.errors.required">Card Number is required</div>
+            </div>
+            <span *ngIf="!isAddMode" class="form-control">{{form.value.number}}</span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="expiryMonth">Month</label>
+          <select formControlName="expiryMonth" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.expiryMonth.errors }">
+            <option *ngFor="let mon of months" [ngValue]="mon">
+              {{ mon }}
+            </option>
+          </select>
+            <div *ngIf="submitted && f.expiryMonth.errors" class="invalid-feedback">
+                <div *ngIf="f.expiryMonth.errors.required">ExpiryMonth is required</div>
+            </div>
+        </div>
+      <div class="form-group col">
+        <label for="expiryYear">Year</label>
+        <select formControlName="expiryYear" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.expiryYear.errors }">
+          <option *ngFor="let yr of years" [ngValue]="yr">
+            {{ yr }}
+          </option>
+        </select>
+       <div *ngIf="submitted && f.expiryYear.errors" class="invalid-feedback">
+          <div *ngIf="f.expiryYear.errors.required">ExpiryYear is required</div>
+        </div>
+      </div>
+    </div>
+   <div class="form-row">
+      <div class="form-group col">
+        <label for="name">Card Holder Name</label>
+        <input *ngIf="isAddMode" type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Card Holder Name is required</div>
+        </div>
+        <span *ngIf="!isAddMode" class="form-control">{{form.value.name}}</span>
+      </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Save
+        </button>
+        <a routerLink="/cards" class="btn btn-link">Cancel</a>
+    </div>
+</form>

@@ -1,0 +1,71 @@
+micronaut:
+  application:
+    name: sample
+  server:
+    port: 8100
+    cors:
+      enabled: true
+      configurations:
+        web:
+          allowedOrigins:
+            - http://localhost:4200
+  security:
+    authentication: bearer
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: JaNdRgUkXp2s5v8y/B?D(G+KbPeShVmY
+              jws-algorithm: HS256
+
+    endpoints:
+      login:
+        enabled: true
+        path: /api/authenticate
+      logout:
+        enabled: true
+        path: /api/logout
+
+    intercept-url-map:
+      - pattern: /api/register
+        httpMethod: POST
+        access: isAnonymous()
+      - pattern: /api/creditcards/**
+        access: isAuthenticated()
+      - pattern: /api/users/**
+        access: isAuthenticated()
+  router:
+    versioning:
+      enabled: true
+      default-version: 1
+      header:
+        enabled: true
+        names: 'X-API-VERSION'
+
+datasources:
+  default:
+    pooled: true
+    jmxExport: true
+    dbCreate: none
+    url: jdbc:h2:mem:devDb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ""
+    dialect: H2
+
+jpa:
+  default:
+    entity-scan:
+      packages: 'com.mifinity.cctest.model'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: validate
+        show_sql: true
+        format_sql: true
+
+liquibase:
+  datasources:
+    default:
+      change-log: classpath:db/migrations.xml

@@ -1,0 +1,11 @@
+﻿<div class="card mt-4">
+    <h4 class="card-header">Welcome {{identity.name}}</h4>
+    <div class="card-body">
+        <p>Your role is:</p>
+      <ul *ngIf="identity">
+        <li *ngFor="let role of identity.roles">{{role}}</li>
+      </ul>
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+    </div>
+</div>
+

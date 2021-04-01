@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet id="v-0.0.1-1" author="chaitanya">
+        <createTable tableName="USER">
+            <column name="id" type="BIGINT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="user_pk"/>
+            </column>
+            <column name="name" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_date" type="DATETIME">
+            </column>
+            <column name="updated_by" type="VARCHAR(30)">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="v-0.0.1-2" author="chaitanya">
+        <createTable tableName="IDENTITY">
+            <column name="id" type="BIGINT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="identity_pk"/>
+            </column>
+            <column name="user_id" type="BIGINT UNSIGNED">
+                <constraints nullable="false" foreignKeyName="identity_user_fk" referencedTableName="USER"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="login" type="VARCHAR(60)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="identity_login_uk"/>
+            </column>
+            <column name="password" type="VARCHAR(120)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(20)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_date" type="DATETIME">
+            </column>
+            <column name="updated_by" type="VARCHAR(30)">
+            </column>
+        </createTable>
+        <createIndex tableName="IDENTITY" indexName="identity_status_idx">
+            <column name="status" type="VARCHAR(20)"></column>
+        </createIndex>
+    </changeSet>
+    <changeSet id="v-0.0.1-3" author="chaitanya">
+        <createTable tableName="ROLE">
+            <column name="name" type="VARCHAR(60)">
+                <constraints primaryKey="true" primaryKeyName="role_pk"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="v-0.0.1-4" author="chaitanya">
+        <createTable tableName="IDENTITY_ROLE">
+            <column name="id" type="BIGINT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="identity_role_pk"/>
+            </column>
+            <column name="identity_id" type="BIGINT UNSIGNED">
+                <constraints nullable="false" foreignKeyName="idr_identity_fk" referencedTableName="IDENTITY"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="role" type="VARCHAR(60)">
+                <constraints nullable="false" foreignKeyName="idr_role_fk" referencedTableName="ROLE"
+                             referencedColumnNames="name"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="v-0.0.1-5" author="chaitanya">
+        <createTable tableName="CREDITCARD">
+            <column name="id" type="BIGINT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="creditcard_pk"/>
+            </column>
+            <column name="user_id" type="BIGINT UNSIGNED">
+                <constraints nullable="false" foreignKeyName="creditcard_user_fk" referencedTableName="USER"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="name" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiry_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(20)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Updated_date" type="DATETIME">
+            </column>
+            <column name="updated_by" type="VARCHAR(30)">
+            </column>
+        </createTable>
+        <createIndex tableName="CREDITCARD" indexName="creditcard_number_idx">
+            <column name="number" type="VARCHAR(20)"></column>
+        </createIndex>
+        <createIndex tableName="CREDITCARD" indexName="creditcard_status_idx">
+            <column name="status" type="VARCHAR(20)"></column>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
