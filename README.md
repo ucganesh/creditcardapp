@@ -8,7 +8,10 @@ Credit card - Add, Edit, Search and List
 Server is built using micronaut framework, JPA, liquibase and H2
 1. Download or clone the project source code
 2. Start the application by running ./gradlew run from the command line in the project (server) folder, this will build the application and run on the port 8100
-3. H2 database can be accessed on the url http://localhost:8200
+3. H2 database can be accessed on the url http://localhost:8082 with following details:
+    jdbc url: jdbc:h2:mem:devDb
+    username: sa
+    password:
 
 
 Client is build using angular 10 + Bootstrap 4.5
